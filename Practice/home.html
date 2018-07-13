@@ -7,7 +7,18 @@
   </head>
   <body>
     <script type="text/javascript">
-      var summary = document.querySelector('body').style;
+      function toggle(font_clr, back_clr, val) {
+        var all = document.querySelector('body').style;
+        all.color=font_clr;
+        all.backgroundColor=back_clr;
+        document.querySelector('.button').value=val;
+      }
+      function colorToggle() {
+        if (document.querySelector('input').value == 'Day') {
+          toggle('white', 'black', 'Night');
+        } else {
+          toggle('black', 'white', 'Day');
+        }  }
     </script>
     <h1><a href="home.html">WEB</a></h1>
     <div class="grid">
@@ -20,16 +31,8 @@
         </ol>
       </div>
       <div class="line">
-        <input type="button" name="Button" value="Day"
-        onclick="
-        if (document.querySelector('input').value == 'Day') {
-          summary.backgroundColor='black';
-          summary.color='white';
-        } else {
-          summary.backgroundColor='white';
-          summary.color='black';
-        }
-        document.querySelector('input').value = document.querySelector('input').value == 'Day'? 'Night' : 'Day';">
+        <input class="button" type="button" name="Button" value="Day"
+        onclick="colorToggle();">
         <h2>Welcome!</h2>
         <p> Hello, web!<br><strong><a href="https://w3.org">HTML</a></strong> is <u>HyperText Markup</u> Language. </p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
