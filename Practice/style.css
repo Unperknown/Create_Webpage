@@ -1,0 +1,33 @@
+<style media="screen">
+#active{
+  color:powderblue;
+  font-weight: bold;
+}
+.visited{
+  color:purple;
+  font-weight: bolder;
+}
+.purple{
+  color: purple;
+  text-align: center;
+}
+@media(min-width:800px) {
+  h1{
+    border-bottom: black 1px solid;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+    width: auto;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns: 150px 2fr;
+  }
+  .line{
+    border-left: black 1px solid;
+    margin-top: 0px;
+    padding-top: 20px;
+    padding-left: 10px;
+    height: auto;
+  }
+}
+</style>
