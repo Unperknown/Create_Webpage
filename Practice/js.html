@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript Test</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var a = ['a', 'b', 'c', 'f'];
+      var i = 0;
+      while (i < a.length) {
+        document.write(a[i] + '<br>');
+        i++;
+      }
+      var summary = document.querySelector('body').style;
+      var tog = true;
+    </script>
+      <input type="button" value="Background Change"
+      onclick="
+      if (tog){
+        summary.backgroundColor='black';
+        summary.color='white';
+      } else {
+        summary.backgroundColor='white';
+        summary.color='black';
+      }
+      tog = !tog;
+      ">
+      <div>
+
+      </div>
+      <br>
+      <h1>TESTTEST</h1>
+  </body>
+</html>
