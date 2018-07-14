@@ -7,11 +7,9 @@ http.createServer(function (req, res) {
   var qs = url.parse(req.url, true).query;
   console.log(qs.id);
   fs.readdir(`./Data`, function(error, files) {
-    var i = 0;
     var list = '<ol>';
-    while (i < files.length) {
-      list += `<li><a href=/?id=${files[i]}> ${files[i]}</a></li>`;
-      i++;
+    for (var i = 0; i < files.length; i++) {
+      list += `<li><a href="/?id=${files[i]}"> ${files[i]}</a></li>`;
     }
     list += '<ol>';
     fs.readFile(`./Data/${qs.id}`, 'utf8', function(error, data){
@@ -26,8 +24,28 @@ http.createServer(function (req, res) {
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"
-          </script>
-          <script src="tmp.js"></script>
+            function toggle(font_clr, back_clr, val, location) {
+              var all = document.querySelector('body').style;
+              all.color=font_clr;
+              all.backgroundColor=back_clr;
+              document.querySelector(location).value=val;
+            }
+            function colorToggle() {
+              if (isValue('Default')) {
+                toggle('powderblue', 'black', 'Night', '.button');
+              } else if (isValue('Night')) {
+                toggle('SkyBlue', 'LightCyan', 'Calmness', '.button');
+              } else if (isValue('Calmness')) {
+                toggle('purple', 'violet', 'Lovely', '.button');
+              } else if (isValue('Lovely')) {
+                toggle('black', 'white', 'Default', '.button');
+              }
+            }
+
+            function isValue(val) {
+              return document.querySelector('input').value == val ? true : false;
+            }
+            </script>
         </head>
         <body>
           <h1><a href="/?id=WEB">WEB</a></h1>
