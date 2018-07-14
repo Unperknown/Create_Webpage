@@ -19,3 +19,7 @@ function colorToggle() {
 function isValue(val) {
   return document.querySelector('input').value == val ? true : false;
 }
+
+function showLuckyNum() {
+  document.querySelector('p').innerHTML = Math.floor(Math.random() * 100);
+}
