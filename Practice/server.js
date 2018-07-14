@@ -13,58 +13,68 @@ http.createServer(function (req, res) {
     }
     list += '<ol>';
     fs.readFile(`./Data/${qs.id}`, 'utf8', function(error, data){
-    res.write(`
-      <!DOCTYPE html>
-      <html lang="en" dir="ltr">
-        <head>
-          <meta charset="utf-8">
-          <title>Ethan's Website</title>
-          <link rel="stylesheet" href="style.css">
-          <script>
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"
-            function toggle(font_clr, back_clr, val, location) {
-              var all = document.querySelector('body').style;
-              all.color=font_clr;
-              all.backgroundColor=back_clr;
-              document.querySelector(location).value=val;
-            }
-            function colorToggle() {
-              if (isValue('Default')) {
-                toggle('powderblue', 'black', 'Night', '.button');
-              } else if (isValue('Night')) {
-                toggle('SkyBlue', 'LightCyan', 'Calmness', '.button');
-              } else if (isValue('Calmness')) {
-                toggle('purple', 'violet', 'Lovely', '.button');
-              } else if (isValue('Lovely')) {
-                toggle('black', 'white', 'Default', '.button');
-              }
-            }
+      var title = qs.id;
+      var description = data;
 
-            function isValue(val) {
-              return document.querySelector('input').value == val ? true : false;
-            }
-            </script>
-        </head>
-        <body>
-          <h1><a href="/?id=WEB">WEB</a></h1>
-          <div class="grid">
-            <div>
-              ${list}
+      if (title === undefined) {
+        title = 'Welcome!';
+      }
+      if (description === undefined) {
+        description = 'Let\'s explore the kinds of Web Language.';
+      }
+      res.write(`
+        <!DOCTYPE html>
+        <html lang="en" dir="ltr">
+          <head>
+            <meta charset="utf-8">
+            <title>Ethan's Website</title>
+            <link rel="stylesheet" href="style.css">
+            <script>
+              src="https://code.jquery.com/jquery-3.3.1.min.js"
+              integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+              crossorigin="anonymous"
+              function toggle(font_clr, back_clr, val, location) {
+                var all = document.querySelector('body').style;
+                all.color=font_clr;
+                all.backgroundColor=back_clr;
+                document.querySelector(location).value=val;
+              }
+              function colorToggle() {
+                if (isValue('Default')) {
+                  toggle('powderblue', 'black', 'Night', '.button');
+                } else if (isValue('Night')) {
+                  toggle('SkyBlue', 'LightCyan', 'Calmness', '.button');
+                } else if (isValue('Calmness')) {
+                  toggle('purple', 'violet', 'Lovely', '.button');
+                } else if (isValue('Lovely')) {
+                  toggle('black', 'white', 'Default', '.button');
+                }
+              }
+
+              function isValue(val) {
+                return document.querySelector('input').value == val ? true : false;
+              }
+              </script>
+          </head>
+          <body>
+            <h1><a href="/">WEB</a></h1>
+            <div class="grid">
+              <div>
+                ${list}
+              </div>
+              <div class="line">
+                <input class="button" type="button" name="Button" value="Default" onclick="colorToggle();">
+                <h2>${title}</h2>
+                <!--jQuery를 사용하여 URL의 id 불러오기-->
+                <p>${description}</p>
+              </div>
             </div>
-            <div class="line">
-              <input class="button" type="button" name="Button" value="Default" onclick="colorToggle();">
-              <h2>${qs.id}</h2>
-              <!--jQuery를 사용하여 URL의 id 불러오기-->
-              <p>${data}</p>
-            </div>
-          </div>
-        </body>
-      </html>`);
-    console.log(data);
-    //write a response to the client
-    res.end(); //end the response
+          </body>
+        </html>`
+      );
+      console.log(data);
+      //write a response to the client
+      res.end(); //end the response
     });
   });
 }).listen(8080); //the server object listens on port 8080:1337/');
