@@ -1,18 +1,18 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
-//create a server object:
+//서버 오브젝트 만들기
 http.createServer(function (req, res) {
   console.log(req.url);
   var qs = url.parse(req.url, true).query;
   console.log(qs.id);
-  fs.readdir(`./Data`, function(error, files) {
+  fs.readdir(`./Article`, function(error, files) {
     var list = '<ol>';
     for (var i = 0; i < files.length; i++) {
       list += `<li><a href="/?id=${files[i]}"> ${files[i]}</a></li>`;
     }
     list += '<ol>';
-    fs.readFile(`./Data/${qs.id}`, 'utf8', function(error, data){
+    fs.readFile(`./Article/${qs.id}`, 'utf8', function(error, data){
       var title = qs.id;
       var description = data;
 
@@ -29,32 +29,8 @@ http.createServer(function (req, res) {
             <meta charset="utf-8">
             <title>Ethan's Website</title>
             <link rel="stylesheet" href="style.css">
-            <script>
-              src="https://code.jquery.com/jquery-3.3.1.min.js"
-              integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-              crossorigin="anonymous"
-              function toggle(font_clr, back_clr, val, location) {
-                var all = document.querySelector('body').style;
-                all.color=font_clr;
-                all.backgroundColor=back_clr;
-                document.querySelector(location).value=val;
-              }
-              function colorToggle() {
-                if (isValue('Default')) {
-                  toggle('powderblue', 'black', 'Night', '.button');
-                } else if (isValue('Night')) {
-                  toggle('SkyBlue', 'LightCyan', 'Calmness', '.button');
-                } else if (isValue('Calmness')) {
-                  toggle('purple', 'violet', 'Lovely', '.button');
-                } else if (isValue('Lovely')) {
-                  toggle('black', 'white', 'Default', '.button');
-                }
-              }
-
-              function isValue(val) {
-                return document.querySelector('input').value == val ? true : false;
-              }
-              </script>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+            <script src="func.js"></script>
           </head>
           <body>
             <h1><a href="/">WEB</a></h1>
@@ -73,8 +49,8 @@ http.createServer(function (req, res) {
         </html>`
       );
       console.log(data);
-      //write a response to the client
-      res.end(); //end the response
+      //클라이언트에게 응답
+      res.end(); //응답 종료
     });
   });
-}).listen(8080); //the server object listens on port 8080:1337/');
+}).listen(8080); //서버 오브젝트가 포트 8080에 연결
